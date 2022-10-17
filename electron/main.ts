@@ -1,6 +1,9 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow ,ipcMain} from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+const { autoUpdater } = require('electron-updater');
+
+let mainWindow: Electron.BrowserWindow ;
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -32,6 +35,9 @@ function createWindow() {
       hardResetMethod: 'exit'
     });
   }
+  win.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 }
 
 app.whenReady().then(() => {
@@ -53,4 +59,14 @@ app.whenReady().then(() => {
       app.quit();
     }
   });
+
+});
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
+});
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
 });
