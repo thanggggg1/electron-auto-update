@@ -5,7 +5,10 @@
   "description": "React-TypeScript-Electron sample with Create React App and Electron Builder",
   "homepage": ".",
   "main": "build/electron/main.js",
-  "private": true,
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/thanggggg1/electron-auto-update.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -34,6 +37,7 @@
     "build": "electron-builder build --win --publish never",
     "deploy": "electron-builder build  --win --publish always"
   },
+  "license": "ISC",
   "build": {
     "extends": null,
     "files": [
@@ -67,9 +71,5 @@
     "electron": "^20.2.0",
     "electron-builder": "^23.3.3",
     "wait-on": "^6.0.1"
-  },
-  "repository": {
-    "type" : "git",
-    "url" : "https://github.com/thanggggg1/electron-auto-update.git"
   }
 }

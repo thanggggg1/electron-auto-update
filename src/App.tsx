@@ -11,7 +11,7 @@ function App() {
     ipcRenderer?.on('update_available', () => {
       ipcRenderer?.removeAllListeners('update_available');
       setUpdate(true)
-      setText('update available')
+      setText('update available,downloading now')
     });
     ipcRenderer?.on('update_downloaded', () => {
       ipcRenderer?.removeAllListeners('update_downloaded');
@@ -31,7 +31,7 @@ function App() {
     <div className="App">
      <div>
        <p>test auto update</p>
-       {isUpdate && <span>need update</span>}
+       {isUpdate && <span>{text}</span>}
      </div>
       <button onClick={restartApp}>
         <p>restart app</p>
